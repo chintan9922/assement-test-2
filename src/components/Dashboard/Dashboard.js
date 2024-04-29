@@ -29,6 +29,13 @@ function Dashboard() {
 
     useEffect(() => {
         let isAuth = JSON.parse(localStorage.getItem("isAuth"));
+        if (isAuth && isAuth !== null) {
+            navigate("/dashboard");
+        }
+    }, [navigate]);
+
+    useEffect(() => {
+        let isAuth = JSON.parse(localStorage.getItem("isAuth"));
         if (!isAuth && isAuth !== null) {
             navigate("/");
         }

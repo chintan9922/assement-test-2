@@ -45,7 +45,7 @@
 }
 
 .table-view {
-    padding-top: 25px;
+    margin-top: 2rem;
     align-items: center;
     justify-items: center;
     display: grid;

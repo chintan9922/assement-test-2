@@ -4,6 +4,11 @@ import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { styled } from "@mui/system";
+import {
+    TablePagination,
+    tablePaginationClasses as classes,
+} from "@mui/base/TablePagination";
 
 function Dashboard() {
     // const [formatedDate, setFormatedDate] = useState("");
@@ -12,15 +17,32 @@ function Dashboard() {
     const [clicked, setClicked] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
+
     let now = new Date();
-        let year = now.getFullYear();
-        let month = (now.getMonth() + 1).toString().padStart(2, "0");
-        let day = now.getDate().toString().padStart(2, "0");
-        let formattedDateTime = year + "-" + month + "-" + day;
+    let year = now.getFullYear();
+    let month = (now.getMonth() + 1).toString().padStart(2, "0");
+    let day = now.getDate().toString().padStart(2, "0");
+    let formattedDateTime = year + "-" + month + "-" + day;
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(4);
+
+    // Avoid a layout jump when reaching the last page with empty rows.
+    const emptyRows =
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     useEffect(() => {
-        
         const value = localStorage.getItem("data");
         if (value) {
             return setData(JSON.parse(value));
@@ -188,7 +210,7 @@ function Dashboard() {
                             }}>
                             <label htmlFor="search">Search:</label>
                             <input
-                                type="search"
+                                type="text"
                                 style={{ margin: "20px 0px 25px 10px" }}
                                 onKeyUp={(e) => setSearchTerm(e.target.value)}
                             />
@@ -200,13 +222,7 @@ function Dashboard() {
                     className="bottomline"
                     style={{ borderBottom: "1px solid black" }}
                 />
-                <div
-                    className="collapse"
-                    style={{
-                        position: "relative",
-                        left: "90%",
-                        marginTop: "10px",
-                    }}>
+                <div className="collapse" style={{display: 'flex', justifyContent:'flex-end', marginTop: '10px'}}>
                     <button className="collapseBtt" onClick={handleCollapse}>
                         Collapse
                     </button>
@@ -229,7 +245,13 @@ function Dashboard() {
                         </thead>
                         <tbody>
                             {filteredData &&
-                                filteredData?.map((task, index) => (
+                                (rowsPerPage > 0
+                                    ? filteredData.slice(
+                                          page * rowsPerPage,
+                                          page * rowsPerPage + rowsPerPage,
+                                      )
+                                    : filteredData
+                                ).map((task, index) => (
                                     <>
                                         <tr key={index}>
                                             <td className={`a${index}`}>
@@ -254,6 +276,41 @@ function Dashboard() {
                                 ))}
                         </tbody>
                     </table>
+                </div>
+                <div
+                    className="pagination"
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        justifyItems: "center",
+                        alignItems: "center",
+                    }}>
+                    <TablePagination
+                        rowsPerPageOptions={[
+                            2,
+                            4,
+                            10,
+                            25,
+                            { label: "All", value: -1 },
+                        ]}
+                        colSpan={3}
+                        count={filteredData.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        slotProps={{
+                            select: {
+                                "aria-label": "rows per page",
+                            },
+                            actions: {
+                                showFirstButton: true,
+                                showLastButton: true,
+                            },
+                        }}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                        style={{ width: "100%" , margin: '0px 0px 25px 0px'}}
+                    />
                 </div>
             </div>
         </div>

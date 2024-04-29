@@ -6,25 +6,25 @@ import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-    const [formatedDate, setFormatedDate] = useState("");
+    // const [formatedDate, setFormatedDate] = useState("");
     const [data, setData] = useState([]);
     const [collapse, setCollapse] = useState(false);
     const [clicked, setClicked] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const navigate = useNavigate()
-
-    useEffect(() => {
-        let now = new Date();
+    let now = new Date();
         let year = now.getFullYear();
         let month = (now.getMonth() + 1).toString().padStart(2, "0");
         let day = now.getDate().toString().padStart(2, "0");
         let formattedDateTime = year + "-" + month + "-" + day;
+
+    useEffect(() => {
+        
         const value = localStorage.getItem("data");
         if (value) {
             return setData(JSON.parse(value));
         }
-        setFormatedDate(formattedDateTime);
     }, []);
 
     useEffect(() => {
@@ -155,7 +155,7 @@ function Dashboard() {
                                 name="date"
                                 className="date-field"
                                 required
-                                min={formatedDate}
+                                min={formattedDateTime}
                             />
                         </div>
                         <div className="text-container">

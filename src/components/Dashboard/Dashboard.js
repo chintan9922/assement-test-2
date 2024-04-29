@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
     const [formatedDate, setFormatedDate] = useState("");
@@ -11,6 +12,7 @@ function Dashboard() {
     const [clicked, setClicked] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate()
 
     useEffect(() => {
         let now = new Date();
@@ -20,12 +22,17 @@ function Dashboard() {
         let formattedDateTime = year + "-" + month + "-" + day;
         const value = localStorage.getItem("data");
         if (value) {
-            return (
-                setData(JSON.parse(value))
-            );
+            return setData(JSON.parse(value));
         }
         setFormatedDate(formattedDateTime);
     }, []);
+
+    useEffect(() => {
+        let isAuth = JSON.parse(localStorage.getItem("isAuth"));
+        if (!isAuth && isAuth !== null) {
+            navigate("/");
+        }
+    }, [navigate]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -116,18 +123,16 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        if(searchTerm.length > 0){
+        if (searchTerm.length > 0) {
             setFilteredData(
                 data.filter((task) =>
                     task.task.toUpperCase().includes(searchTerm.toUpperCase()),
                 ),
             );
         } else {
-            setFilteredData(data)
+            setFilteredData(data);
         }
-        
     }, [data, searchTerm]);
-
 
     return (
         <div className="maincontainer">

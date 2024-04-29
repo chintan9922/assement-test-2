@@ -13,8 +13,7 @@ function App() {
     };
     return (
         <div className="App">
-            {showHeader() && <Header /> }
-            
+            {showHeader() && <Header />}
             <Routes>
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />

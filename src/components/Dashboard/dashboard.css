@@ -40,7 +40,7 @@
     border-radius: 5px;
     margin-left: 50px;
     font-size: 15px;
-    margin-top:20px;
+    margin-top: 20px;
     margin-bottom: 25px;
 }
 
@@ -68,7 +68,6 @@ table {
     cursor: ns-resize;
 }
 
-
 .delete {
     width: 7%;
 }
@@ -88,4 +87,3 @@ tr {
     justify-items: center;
     text-align: center;
 }
-

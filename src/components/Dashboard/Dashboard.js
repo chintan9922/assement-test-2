@@ -21,9 +21,10 @@ function Dashboard() {
         const value = localStorage.getItem("data");
         if (value) {
             return (
-                setData(JSON.parse(value)), setFormatedDate(formattedDateTime)
+                setData(JSON.parse(value))
             );
         }
+        setFormatedDate(formattedDateTime);
     }, []);
 
     const handleSubmit = (e) => {

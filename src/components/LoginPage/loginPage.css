@@ -1,0 +1,26 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    background-color: whitesmoke;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.card{
+    background-color: rgb(89, 100, 111);
+    height: auto;
+    width: 50%;
+    border-radius: 10px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.title{
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+}

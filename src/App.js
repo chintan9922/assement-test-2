@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Header from "./components/Header/Header";
+import LoginPage from "./components/LoginPage/LoginPage";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const location = useLocation();
+
+    const showHeader = () => {
+        const { pathname } = location;
+        return ["/dashboard"].includes(pathname);
+    };
+    return (
+        <div className="App">
+            {showHeader() && <Header /> }
+            
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

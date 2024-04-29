@@ -1,0 +1,91 @@
+.maincontainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: grey;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.container {
+    background-color: whitesmoke;
+    height: 90%;
+    width: 90%;
+    border-radius: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.field {
+    display: grid;
+    justify-items: center;
+}
+
+.date-container,
+.text-container {
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.date-field,
+.task-field {
+    border-radius: 5px;
+    margin-left: 5px;
+}
+.add-task {
+    height: 40px;
+    width: 150px;
+    border-radius: 5px;
+    margin-left: 50px;
+    font-size: 15px;
+    margin-top:20px;
+    margin-bottom: 25px;
+}
+
+.table-view {
+    padding-top: 25px;
+    align-items: center;
+    justify-items: center;
+    display: grid;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+    align-items: center;
+}
+
+.number {
+    width: 5%;
+    cursor: ns-resize;
+}
+.date {
+    width: 12%;
+    cursor: ns-resize;
+}
+
+
+.delete {
+    width: 7%;
+}
+
+.task {
+    cursor: ns-resize;
+    /* width: 30%; */
+}
+th,
+td {
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+tr {
+    border: 1px solid #ddd;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+}
+

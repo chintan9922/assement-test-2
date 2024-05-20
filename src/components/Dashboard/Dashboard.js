@@ -4,10 +4,8 @@ import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { styled } from "@mui/system";
 import {
     TablePagination,
-    tablePaginationClasses as classes,
 } from "@mui/base/TablePagination";
 
 function Dashboard() {
